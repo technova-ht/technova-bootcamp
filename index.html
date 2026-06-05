@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Bootcamp TECHNOVA 2026 | Formation Tech Gratuite</title>
+    <meta name="title" content="Bootcamp TECHNOVA 2026 | Formation Tech Gratuite">
+    <meta name="description" content="Rejoignez le Bootcamp TECHNOVA 2026. Une formation 100% gratuite sur l'IA, la Cybersécurité, le Marketing Digital et plus. Obtenez votre certificat !">
+    <meta name="keywords" content="Bootcamp, TECHNOVA, IA, Cybersécurité, Marketing Digital, Design, Formation gratuite, Tech 2026">
+    <meta name="author" content="TECHNOVA">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://technova-bootcamp.com/">
+    <meta property="og:title" content="Bootcamp TECHNOVA 2026 | Formation Tech Gratuite">
+    <meta property="og:description" content="Formation intensive de 2 weekends sur les métiers du futur. Inscrivez-vous maintenant !">
+    <meta property="og:image" content="https://technova-bootcamp.com/assets/banner.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://technova-bootcamp.com/">
+    <meta property="twitter:title" content="Bootcamp TECHNOVA 2026 | Formation Tech Gratuite">
+    <meta property="twitter:description" content="Formation intensive de 2 weekends sur les métiers du futur. Inscrivez-vous maintenant !">
+    <meta property="twitter:image" content="https://technova-bootcamp.com/assets/banner.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Scripts & Styles -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<main id="app-container" role="main">
+    <!-- Header/Logo Area -->
+    <header class="app-header">
+        <div class="logo">
+            <span class="logo-icon">🚀</span>
+            <span class="logo-text">TECHNOVA<span>2026</span></span>
+        </div>
+    </header>
+
+    <!-- Intro Screen -->
+    <section id="intro" class="screen active" aria-labelledby="intro-title">
+        <div class="hero-content">
+            <div class="badge">Inscriptions Ouvertes</div>
+            <h1 id="intro-title">Propulsez votre carrière digitale</h1>
+            <p class="hero-desc">Participez à une expérience immersive de <strong>2 weekends</strong> (20-21 & 27-28 juin) pour maîtriser les technologies de demain.</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="f-icon">🤖</span>
+                    <span>IA & Automatisation</span>
+                </div>
+                <div class="feature-item">
+                    <span class="f-icon">🔐</span>
+                    <span>Cybersécurité</span>
+                </div>
+                <div class="feature-item">
+                    <span class="f-icon">📊</span>
+                    <span>Marketing Digital</span>
+                </div>
+                <div class="feature-item">
+                    <span class="f-icon">🎨</span>
+                    <span>Design & Vidéo</span>
+                </div>
+            </div>
+
+            <div class="info-footer">
+                <p>📜 Certificat de participation inclus • 100% Gratuit</p>
+            </div>
+
+            <button type="button" class="btn-primary btn-xl mt-30" onclick="startForm()">
+                Commencer l'inscription
+                <span class="btn-arrow">→</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Form Container -->
+    <section id="form-container" class="screen hidden" aria-labelledby="form-title">
+        <div class="form-header">
+            <h2 id="form-title" class="sr-only">Formulaire d'inscription</h2>
+            <div class="step-indicator">
+                Étape <span id="current-step-num">1</span> sur 4
+            </div>
+            <div class="progress-wrapper">
+                <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+        </div>
+
+        <form id="multiStepForm" novalidate>
+            <!-- Step 1: Informations personnelles -->
+            <article class="form-step active" data-step="1">
+                <div class="step-title-group">
+                    <h3>Informations personnelles</h3>
+                    <p>Dites-nous qui vous êtes.</p>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="input-field">
+                        <label for="nom">Nom complet</label>
+                        <input type="text" id="nom" name="nom" placeholder="Ex: Jean Dupont" required>
+                        <span class="error-msg">Veuillez entrer votre nom complet.</span>
+                    </div>
+                    <div class="input-field">
+                        <label for="sexe">Sexe</label>
+                        <select id="sexe" name="sexe" required>
+                            <option value="" disabled selected>Sélectionner...</option>
+                            <option value="homme">Homme</option>
+                            <option value="femme">Femme</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                        <span class="error-msg">Ce champ est requis.</span>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-field">
+                        <label for="age">Âge</label>
+                        <input type="number" id="age" name="age" min="15" max="99" placeholder="Ex: 22" required>
+                        <span class="error-msg">Âge invalide.</span>
+                    </div>
+                    <div class="input-field">
+                        <label for="phone">Téléphone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Ex: +509 ..." required>
+                        <span class="error-msg">Numéro requis.</span>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <label for="email">Email professionnel</label>
+                    <input type="email" id="email" name="email" placeholder="jean.dupont@exemple.com" required>
+                    <span class="error-msg">Email invalide.</span>
+                </div>
+
+                <div class="input-field">
+                    <label for="ville">Ville / Commune</label>
+                    <input type="text" id="ville" name="ville" placeholder="Ex: Pétion-Ville" required>
+                </div>
+
+                <div class="grid-2">
+                    <div class="input-field">
+                        <label for="niveau">Niveau d'étude</label>
+                        <input type="text" id="niveau" name="niveau" placeholder="Ex: Licence" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="ecole">Institution (Optionnel)</label>
+                        <input type="text" id="ecole" name="ecole" placeholder="Université / École">
+                    </div>
+                </div>
+
+                <div class="btn-actions">
+                    <button type="button" class="btn-primary" onclick="changeStep(1)">
+                        Continuer <span>→</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Step 2: Motivation -->
+            <article class="form-step hidden" data-step="2">
+                <div class="step-title-group">
+                    <h3>Votre Motivation</h3>
+                    <p>Pourquoi ce bootcamp est-il pour vous ?</p>
+                </div>
+
+                <div class="input-field">
+                    <label for="motivation">Pourquoi voulez-vous participer ?</label>
+                    <textarea id="motivation" name="motivation" rows="4" placeholder="Décrivez vos objectifs..." required></textarea>
+                </div>
+
+                <div class="input-field">
+                    <label>Avez-vous déjà suivi une formation similaire ?</label>
+                    <div class="radio-cards">
+                        <label class="radio-card">
+                            <input type="radio" name="experience" value="oui" required>
+                            <div class="card-content">Oui</div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="experience" value="non" required>
+                            <div class="card-content">Non</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <label for="attentes">Qu'attendez-vous de ce programme ?</label>
+                    <textarea id="attentes" name="attentes" rows="3" placeholder="Vos attentes spécifiques..." required></textarea>
+                </div>
+
+                <div class="btn-actions space-between">
+                    <button type="button" class="btn-ghost" onclick="changeStep(-1)">Précédent</button>
+                    <button type="button" class="btn-primary" onclick="changeStep(1)">Continuer <span>→</span></button>
+                </div>
+            </article>
+
+            <!-- Step 3: Domaines d'intérêt -->
+            <article class="form-step hidden" data-step="3">
+                <div class="step-title-group">
+                    <h3>Domaines d'intérêt</h3>
+                    <p>Sélectionnez les sujets qui vous passionnent.</p>
+                </div>
+
+                <div class="checkbox-grid">
+                    <label class="check-card">
+                        <input type="checkbox" name="domaines" value="IA">
+                        <div class="card-content">
+                            <span class="icon">🤖</span>
+                            <span class="label">IA & Automation</span>
+                        </div>
+                    </label>
+                    <label class="check-card">
+                        <input type="checkbox" name="domaines" value="Cybersecurite">
+                        <div class="card-content">
+                            <span class="icon">🔐</span>
+                            <span class="label">Cybersécurité</span>
+                        </div>
+                    </label>
+                    <label class="check-card">
+                        <input type="checkbox" name="domaines" value="Marketing">
+                        <div class="card-content">
+                            <span class="icon">📊</span>
+                            <span class="label">Marketing Digital</span>
+                        </div>
+                    </label>
+                    <label class="check-card">
+                        <input type="checkbox" name="domaines" value="Design">
+                        <div class="card-content">
+                            <span class="icon">🎨</span>
+                            <span class="label">Design Graphique</span>
+                        </div>
+                    </label>
+                    <label class="check-card">
+                        <input type="checkbox" name="domaines" value="Video">
+                        <div class="card-content">
+                            <span class="icon">🎬</span>
+                            <span class="label">Montage Vidéo</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="btn-actions space-between">
+                    <button type="button" class="btn-ghost" onclick="changeStep(-1)">Précédent</button>
+                    <button type="button" class="btn-primary" onclick="changeStep(1)">Continuer <span>→</span></button>
+                </div>
+            </article>
+
+            <!-- Step 4: Engagement -->
+            <article class="form-step hidden" data-step="4">
+                <div class="step-title-group">
+                    <h3>Engagement Final</h3>
+                    <p>Dernière étape avant le quiz !</p>
+                </div>
+
+                <div class="input-field">
+                    <label>Disponibilité pour les 2 weekends ?</label>
+                    <div class="radio-cards">
+                        <label class="radio-card">
+                            <input type="radio" name="dispo" value="oui" required>
+                            <div class="card-content">Oui</div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="dispo" value="non" required>
+                            <div class="card-content">Non</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <label>Engagement de participation active ?</label>
+                    <div class="radio-cards">
+                        <label class="radio-card">
+                            <input type="radio" name="active" value="oui" required>
+                            <div class="card-content">Oui</div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="active" value="non" required>
+                            <div class="card-content">Non</div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="terms-area mt-30">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" name="confirm" required>
+                        <span class="checkmark"></span>
+                        <span class="terms-text">Je confirme que ma participation est sérieuse et que les informations fournies sont exactes. ✅</span>
+                    </label>
+                </div>
+
+                <div class="btn-actions space-between">
+                    <button type="button" class="btn-ghost" onclick="changeStep(-1)">Précédent</button>
+                    <button type="submit" class="btn-primary btn-submit" id="submitBtn">Finaliser l'inscription</button>
+                </div>
+            </article>
+        </form>
+    </section>
+
+    <!-- Quiz Screen -->
+    <section id="quizSection" class="screen hidden" aria-labelledby="quiz-title">
+        <div class="step-title-group">
+            <h2 id="quiz-title">Évaluation Initiale</h2>
+            <p>Testez vos connaissances de base.</p>
+        </div>
+        
+        <div id="quizContent" class="quiz-container">
+            <!-- Quiz injected via JS -->
+        </div>
+        
+        <div class="btn-actions">
+            <button type="button" class="btn-primary btn-xl" onclick="submitQuiz()">Terminer le Quiz</button>
+        </div>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <p>&copy; 2026 TECHNOVA Bootcamp. Tous droits réservés.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
