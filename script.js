@@ -7,6 +7,22 @@
 const supabaseUrl = 'https://qkvywqgnnfmgcbozaeqc.supabase.co';
 const supabaseKey = 'sb_publishable_KoLXhGkTKB6kM70cnKZxyw_y_ZQQvCO'; 
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+let ip = ''
+async function getIP(){
+
+    try {
+        const url = await fetch('https://api.ipify.org?format=json')
+        const result = await url.json()
+        return result
+    } catch (error) {
+        console.error('failed to get public IP',error)
+        return {}
+    }
+
+}
+
+
+
 
 // --- STATE MANAGEMENT ---
 const STATE = {
@@ -185,8 +201,13 @@ form.addEventListener('submit', async (e) => {
     
     // Process checkbox engagement
     data.confirm = document.querySelector('input[name="confirm"]').checked;
-
+   const ip =  await getIP()
+   const payload = {
+    ip : ip.ip,
+    attempts: 1
+   }
     try {
+   
         const { error } = await supabaseClient
             .from('registrations')
             .insert([{
@@ -204,17 +225,31 @@ form.addEventListener('submit', async (e) => {
                 domaines: data.domaines,
                 dispo: data.dispo,
                 active: data.active,
-                confirm: data.confirm
+                confirm: data.confirm,
+                ip:payload.ip
             }]);
 
         if (error) throw error;
-
+       
+  
+    const{ error:InsertError } =  await supabaseClient
+  .from('log_ips')
+  .insert(payload)
+  if(InsertError){
+    console.error('error inserting ip', InsertError)
+    return
+  }
         // Success!
         transitionToQuiz();
 
     } catch (error) {
-        console.error('Supabase Error:', error);
-        showToast('Erreur lors de l\'inscription. Veuillez vérifier votre connexion.', 'error');
+        //console.error('Supabase Error:', error);
+        if(error.code === '23505'){
+           alert("User already registered ")
+           return
+        }
+        showToast('Erreur lors de l\'inscription.', 'error');
+        alert(error.message)
     } finally {
         setLoading(false);
     }
